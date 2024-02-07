@@ -3,18 +3,18 @@
 import { useState } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { amber, grey } from '@mui/material/colors';
-import { CssBaseline, Button, useMediaQuery } from '@mui/material';
+import { CssBaseline, Button, } from '@mui/material';
 
 export default function MaterialMode() {
-  // const mode = useMediaQuery('(prefers-color-scheme: dark)') ?
-  //   'dark' : 'light';
+//   const mode = useMediaQuery('(prefers-color-scheme: dark)') ?
+//     'dark' : 'light';
 
   const [mode, setMode] = useState('light');
   const toggleMode = () => setMode(prev =>
     prev === 'light' ? 'dark' : 'light'
   );
 
-  
+
   const theme = createTheme({
     palette: {
       mode,

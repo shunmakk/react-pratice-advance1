@@ -11,6 +11,7 @@ import MaterialGrid from './Components/MaterialGrid';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import theme  from './Components/theme'
 import MaterialMode from './Components/MaterialMode';
+import FormMui from './Components/FormMui';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -32,6 +33,7 @@ root.render(
   <MaterialGrid/>
   </ThemeProvider> 
   <MaterialMode/>
+  <FormMui/>
   
   </React.StrictMode>
 );
