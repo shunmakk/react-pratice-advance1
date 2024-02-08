@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Suspense} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
@@ -12,9 +12,28 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import theme  from './Components/theme'
 import MaterialMode from './Components/MaterialMode';
 import FormMui from './Components/FormMui';
+import QueryPre from './Components/QueryPre';
+import QueryBasic from './Components/QueryBasic';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ErrorBoundary } from 'react-error-boundary';
+import QuerySuspence from './Components/QuerySuspence';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+ //React Queryを実行する準備
+ const cli = new QueryClient();
+
+ //QuerySuspenceの方。　　suspenceモードを有効化
+ const cli2 = new QueryClient({
+   defaultOptions: {
+     queries: {
+       suspense: true,
+     },
+   },
+ });
+
 root.render(
   <React.StrictMode>
    {/* portalとerror系 エラー系はコメントアウト */}
@@ -34,6 +53,18 @@ root.render(
   </ThemeProvider> 
   <MaterialMode/>
   <FormMui/>
+  {/* React Query */}
+  <QueryPre/>
+  <QueryClientProvider client={cli}>
+    <QueryBasic/>
+  </QueryClientProvider>
+  <Suspense fallback={<p>Loading...</p>}>
+    <ErrorBoundary fallback={<p>エラーが発生しました</p>}>
+      <QueryClientProvider client={cli2}>
+        <QuerySuspence/>
+      </QueryClientProvider>
+    </ErrorBoundary>
+  </Suspense>
   
   </React.StrictMode>
 );
